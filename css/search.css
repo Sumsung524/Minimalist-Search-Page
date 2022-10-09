@@ -47,7 +47,7 @@
     transform: translateY(-50%);
     width: .2083rem;
     height: .2083rem;
-    background: url(../images/search_icon.png) no-repeat -0.2083rem 0;
+    background: url(../images/search_icon.png) no-repeat 0 0;
     background-size: 325%;
     cursor: pointer;
 }
@@ -155,9 +155,9 @@ footer {
     position: absolute;
     bottom: .2604rem;
     left: 50%;
+    font-size: .0625rem;
     text-align: center;
     transform: translateX(-50%);
-    /* color: red; */
 }
 
 footer a {
