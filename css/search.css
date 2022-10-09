@@ -1,11 +1,11 @@
+/* body {
+    height: 10000px;
+    background-color: #ccc;
+} */
+
 * {
     margin: 0;
     padding: 0;
-}
-
-body {
-    height: 10000px;
-    background-color: #ccc;
 }
 
 /* 搜索 */
@@ -19,7 +19,7 @@ body {
 /* 搜索logo */
 .search-box .search-logo {
     position: absolute;
-    top: 10vh;
+    top: 0.8rem;
     left: 50%;
     transform: translateX(-50%);
     width: 1.4167rem;
@@ -32,7 +32,7 @@ body {
 /* 搜索栏 */
 .search-box .search-bar {
     position: absolute;
-    top: 25vh;
+    top: 1.6rem;
     left: 50%;
     transform: translateX(-50%);
     width: 3.7344rem;
@@ -73,7 +73,7 @@ body {
 
 .search-box .search-bar input:focus {
     border-color: rgb(7, 153, 250);
-    box-shadow: 5px 5px 5px rgba(7, 92, 250, 0.1);
+    box-shadow: 0 0 .086rem rgba(7, 153, 250, .1);
 }
 
 /* 搜索button */
@@ -96,17 +96,71 @@ body {
 
 /* 搜索引擎选项卡 */
 .search-card {
-    display: block;
+    display: none;
     position: absolute;
-    bottom: 0;
+    bottom: -0.0521rem;
     left: 0;
     transform: translateY(100%);
     width: 100%;
     border: .0104rem solid #e6e6e6;
     border-radius: .026rem;
-    background-color: pink;
+    background-color: #fff;
+    box-shadow: 0 0 .05rem rgba(0, 0, 0, .1);
+}
+
+.search-card .arrow {
+    position: absolute;
+    left: .0525rem;
+    top: -0.0104rem;
+    transform: translateY(-100%);
+    width: 0;
+    height: 0;
+    border: .0521rem solid transparent;
+    border-bottom-color: #fff;
 }
 
 .search-card ul {
     list-style: none;
+}
+
+.search-card ul li {
+    float: left;
+    width: 31.9%;
+    font-size: .0625rem;
+    color: #333;
+    line-height: 0.1302rem;
+    text-align: center;
+    margin: .026rem;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    border-radius: .026rem;
+    cursor: pointer;
+    transition: all .6s;
+}
+
+.search-card ul li:hover {
+    color: #4285f4;
+}
+
+.search-card ul li .search-items-ico {
+    float: left;
+    width: .1302rem;
+    height: .1302rem;
+    background: url(../images/search_icon.png) no-repeat -0.4167rem 0;
+    background-size: 520%;
+}
+
+/* footer */
+footer {
+    position: absolute;
+    bottom: .2604rem;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    /* color: red; */
+}
+
+footer a {
+    color: #000;
+    text-decoration: none;
 }
