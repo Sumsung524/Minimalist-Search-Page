@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 10000px;
+    background-color: #ccc;
+}
+
+/* 搜索 */
+.search-box {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+/* 搜索logo */
+.search-box .search-logo {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.4167rem;
+    height: .4792rem;
+    background: url(../images/search_logo.svg) 0 0;
+    background-size: cover;
+    overflow: hidden;
+}
+
+/* 搜索栏 */
+.search-box .search-bar {
+    position: absolute;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3.7344rem;
+    height: .2604rem;
+}
+
+/* 搜索引擎选项 */
+.search-bar .search-select {
+    position: absolute;
+    left: .026rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .2083rem;
+    height: .2083rem;
+    background: url(../images/search_icon.png) no-repeat -0.2083rem 0;
+    background-size: 325%;
+    cursor: pointer;
+}
+
+/* 搜索输入框 */
+.search-box .search-bar input {
+    width: 100%;
+    height: 100%;
+    font-size: .0833rem;
+    color: #999;
+    outline: none;
+    text-indent: .2604rem;
+    box-sizing: border-box;
+    border: .0104rem solid #e6e6e6;
+    border-radius: .0521rem;
+    transition: all .6s;
+}
+
+.search-box .search-bar input::placeholder {
+    font-size: .0833rem;
+    color: #ccc;
+}
+
+.search-box .search-bar input:focus {
+    border-color: rgb(7, 153, 250);
+    box-shadow: 5px 5px 5px rgba(7, 92, 250, 0.1);
+}
+
+/* 搜索button */
+.search-bar .search-btn {
+    position: absolute;
+    right: .026rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .2083rem;
+    height: .2083rem;
+    background: url(../images/searchlogo_gray.svg) no-repeat center;
+    background-size: 62%;
+    cursor: pointer;
+    transition: all .6s;
+}
+
+.search-bar .search-btn:hover {
+    background-image: url(../images/searchlogo_blue.svg);
+}
+
+/* 搜索引擎选项卡 */
+.search-card {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    width: 100%;
+    border: .0104rem solid #e6e6e6;
+    border-radius: .026rem;
+    background-color: pink;
+}
+
+.search-card ul {
+    list-style: none;
+}
