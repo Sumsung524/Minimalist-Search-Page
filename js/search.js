@@ -171,4 +171,92 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // 七、第一次启动页面，使用提示
+    if (!window.localStorage.getItem('FirstOpen')) {    // 只要第一次打开页面执行代码
+
+        // 显示tipscard函数 tipsCardFn()
+        function tipsCardFn(ele, positionTop, positionLeft, content) {  // ele 添加在ele元素内 positionTop positionLeft tipscard文字位置 content 文本内容
+            let tipscard = document.createElement('div');
+            tipscard.innerHTML = content + '<span></span>';
+            // 提示卡样式 tipscard.style
+            tipscard.style.position = 'absolute';
+            tipscard.style.top = positionTop;
+            tipscard.style.left = positionLeft;
+            tipscard.style.color = '#fff';
+            tipscard.style.whiteSpace = 'nowrap';
+            // 小三角样式 span.style
+            tipscard.querySelector('span').style.position = 'absolute';
+            tipscard.querySelector('span').style.bottom = '-0.0104rem';
+            tipscard.querySelector('span').style.left = '.0208rem';
+            tipscard.querySelector('span').style.transform = 'translateY(100%)';
+            tipscard.querySelector('span').style.width = '0';
+            tipscard.querySelector('span').style.height = '0';
+            tipscard.querySelector('span').style.border = '.0521rem solid transparent';
+            tipscard.querySelector('span').style.borderTopColor = '#fff';
+
+            ele.appendChild(tipscard);
+        }
+
+        // 开始使用button函数   startUseFn()
+        function startUseFn(ele, content, clearEle, parentNode) { // ele 添加在ele元素后 content 按钮文本内容 clearEle 删除元素(含本身) parentNode 删除元素父节点
+            let startUse = document.createElement('button');
+            // startUse.style
+            startUse.style.position = 'absolute';
+            startUse.style.top = '80%';
+            startUse.style.left = '50%';
+            startUse.style.color = '#fff';
+            startUse.style.padding = '0.08rem';
+            startUse.style.border = '.02rem solid #fff';
+            startUse.style.borderRadius = '.03rem';
+            startUse.style.backgroundColor = 'rgb(255 0 0)';
+            startUse.style.cursor = 'pointer';
+            startUse.innerHTML = content;
+            ele.appendChild(startUse);
+
+            // 开始使用button事件
+            const removeTips = startUse.addEventListener('click', function () {
+                clearEle.style.opacity = '0';   // 隐藏遮罩动画
+                setTimeout(function () {
+                    clearEle.innerHTML = '';
+                    parentNode.removeChild(clearEle);
+                    startUse.removeEventListener('click', removeTips);   //删除事件
+                }, 1000);
+
+            });
+        }
+
+        // 遮罩层 shade
+        let shade = document.createElement('div');
+        shade.style.position = 'absolute';
+        shade.style.top = '0';
+        shade.style.left = '0';
+        shade.style.width = '100%';
+        shade.style.height = '100%';
+        shade.style.backgroundColor = '#333';
+        shade.style.opacity = '0';
+        shade.style.transition = 'all 1s';
+        searchBox.appendChild(shade);   // 添加遮罩至search-box盒子内
+
+        // 0.5s后
+        window.setTimeout(function () {
+            shade.style.opacity = '.5'; // 显示遮罩
+            tipsCardFn(shade, '1.4rem', '3.18rem', '【Tab】键,快速切换搜索引擎。'); // 显示tab键提示
+            tipsCardFn(shade, '1.4rem', '6.66rem', '光标聚焦搜索栏，【Enter】键，直接进行搜索。');      // 显示Enter键提示
+            tipsCardFn(shade, '1.65rem', '4.4rem', '光标未聚焦搜索栏，【Enter】键，光标聚焦搜索栏。');  // 显示Enter键位提示
+            startUseFn(shade, '开始使用', shade, searchBox);    // 开始使用及点击关闭提示信息事件
+        }, 500);
+
+        window.localStorage.setItem('FirstOpen', false);    // 以后打开不允许执行以上条件语句代码
+    }
+
+    // 测试按钮，清楚本地储存
+    // if (true) {
+    //     let reset = document.createElement('button');
+    //     reset.innerHTML = '清理本地存储数据';
+    //     searchBox.appendChild(reset);
+    //     reset.addEventListener('click', function () {
+    //         window.localStorage.clear();
+    //     });
+    // }
+
 });
