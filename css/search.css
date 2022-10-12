@@ -24,7 +24,7 @@
     transform: translateX(-50%);
     width: 1.4167rem;
     height: .4792rem;
-    background: url(../images/search_logo.svg) 0 0;
+    background: url(../images/search_logo.svg) no-repeat;
     background-size: cover;
     overflow: hidden;
 }
@@ -47,7 +47,7 @@
     transform: translateY(-50%);
     width: .2083rem;
     height: .2083rem;
-    background: url(../images/search_icon.png) no-repeat 0 0;
+    background: url(../images/search_icon.png) no-repeat;
     background-size: 325%;
     cursor: pointer;
 }

@@ -83,12 +83,12 @@ window.addEventListener('DOMContentLoaded', function () {
     const searchBtn = searchBox.querySelector('.search-btn');
     const searchCard = document.querySelector('.search-bar').querySelector('.search-card');
 
-    // 一、页面启动光标选中搜索栏
+    // 1.页面启动光标选中搜索栏
     searchInput.select();
 
-    // 二、显示/隐藏搜索引擎选项卡 search-card
-    // 1.点击输入框左侧图标(searchIco)显示/隐藏选项卡 
-    var flag = true;
+    // 2.显示/隐藏搜索引擎选项卡 search-card
+    // 2.1.输入框左侧图标(searchIco)显示/隐藏选项卡 点击事件
+    let flag = true;    // 判断选项卡的显示状态
     searchIco.addEventListener('click', function (e) {
         e.stopPropagation();    // 阻止事件冒泡，防止触发searchBox点击事件
         if (flag) {
@@ -100,8 +100,7 @@ window.addEventListener('DOMContentLoaded', function () {
             flag = true;
         }
     });
-
-    // 2.点击searchBox区域隐藏选项卡
+    // 2.2.点击searchBox区域隐藏选项卡
     searchBox.addEventListener('click', function () {
         if (!flag) {
             searchCard.style.display = 'none';
@@ -109,8 +108,8 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 三、生成搜索引擎选项
-    // 1.根据搜索引擎信息searchInfo自动生成searchCard中items信息
+    // 3.生成搜索引擎选项
+    // 3.1.根据搜索引擎信息searchInfo自动生成searchCard中items信息
     for (let i = 0; i < searchInfo.length; i++) {
         let li = document.createElement('li');
         li.setAttribute('data-index', i);   // 设置自定义属性index
@@ -119,60 +118,58 @@ window.addEventListener('DOMContentLoaded', function () {
         li.querySelector('.search-items-ico').style.backgroundPosition = searchInfo[i].positionItemsIcon;
     }
 
-    // 四、切换搜索引擎
-    // 1.点击li，改变搜索引擎信息、Ico及Logo    事件委托
-    var num = 0;    // 记录li索引号
+    // 4.切换搜索引擎
+    // 函数changeSearchFn(): 切换搜索引擎  index 索引号
+    function changeSearchFn(index) {
+        searchIco.style.backgroundPosition = searchInfo[index].positionIcon;    // 切换selectIcon
+        searchLogo.style.backgroundPosition = searchInfo[index].positionlogo;   // 切换banner logo
+        window.localStorage.setItem('searchItemIndex', index);
+    }
+    // 4.1.启动页面切换至上次用户选择的搜索引擎
+    let searchItemIndex = window.localStorage.getItem('searchItemIndex') ? parseInt(window.localStorage.getItem('searchItemIndex')) : 0;    // 检测是否存在searchItemIndex
+    changeSearchFn(searchItemIndex);
+    // 4.2.事件委托 切换搜索引擎点击事件
     searchCard.addEventListener('click', function (e) {
         let index = e.target.getAttribute('data-index') || e.target.parentNode.getAttribute('data-index');
-        // 1.1切换selectIcon
-        searchIco.style.backgroundPosition = searchInfo[index].positionIcon;
-        // 1.2切换banner logo
-        searchLogo.style.backgroundPosition = searchInfo[index].positionlogo;
-        num = index;
+        changeSearchFn(index);
+        searchItemIndex = index;    // 确保变量searchItemIndex与本地存储数据searchItemIndex实时同步
     });
 
-    // 五、点击搜索
-    // 1.在新页面打开选项开关
-    let newPageOn = true;
+    // 5.点击searchBtn搜索事件
+    let newPageOn = true;   // [在新页面打开] 选项开关
     searchBtn.addEventListener('click', function () {
         if (newPageOn) {
-            window.open(searchInfo[num].url + searchInput.value);       // 新窗口打开
+            window.open(searchInfo[searchItemIndex].url + searchInput.value);       // 新窗口打开
             searchInput.select();   // 搜索后选中输入文本
         } else {
-            location.href = searchInfo[num].url + searchInput.value;    // 当前页面打开
+            location.href = searchInfo[searchItemIndex].url + searchInput.value;    // 当前页面打开
         }
     });
 
-    // 六、快捷键
-    // 1.判断聚焦输入栏状态
-    var enter = true;
-    searchInput.addEventListener('focus', function () {
-        enter = true;
-    });
-
-    searchInput.addEventListener('blur', function () {
-        enter = false;
-    });
-
+    // 6.快捷键
+    // 6.1.判断聚焦输入栏状态
+    let enter = true;
+    searchInput.addEventListener('focus', function () { enter = true; });
+    searchInput.addEventListener('blur', function () { enter = false; });
     window.addEventListener('keydown', function (e) {
-        // 2.回车Enter快捷键
+        // 6.2.回车Enter快捷键
         if (e.code === 'Enter' && enter) {
             searchBtn.click();      // 聚焦时进行搜索
         } else if (e.code === 'Enter' && !enter) {
             searchInput.select();   // 未聚焦时聚焦搜索栏
         }
-
-        // 3.Tab快捷键，切换搜索引擎
+        // 6.3.Tab快捷键，切换搜索引擎
         if (e.code === 'Tab') {
             e.preventDefault();   //阻止默认行为
-            num++;
-            if (num >= searchCard.querySelectorAll('li').length) num = 0;
-            searchCard.querySelectorAll('li')[num].click();
+            searchItemIndex++;
+            if (searchItemIndex >= searchCard.querySelectorAll('li').length) searchItemIndex = 0;
+            window.localStorage.setItem('searchItemIndex', searchItemIndex);    // 确保变量searchItemIndex与本地存储数据searchItemIndex实时同步
+            searchCard.querySelectorAll('li')[searchItemIndex].click();
         }
     });
 
-    // 七、第一次启动页面显示使用提示
-    //函数1：显示tipscard tipsCardFn()
+    // 7.第一次启动页面显示使用提示
+    // 函数tipsCardFn()：显示tipscard
     function tipsCardFn(ele, positionTop, positionLeft, content) {  // ele 添加在ele元素内 positionTop positionLeft tipscard文字位置 content 文本内容
         let tipscard = document.createElement('div');
         tipscard.innerHTML = content + '<span></span>';
@@ -193,8 +190,7 @@ window.addEventListener('DOMContentLoaded', function () {
         tipscard.querySelector('span').style.borderTopColor = '#fff';
         ele.appendChild(tipscard);  // 添加节点
     }
-
-    //函数2：开始使用button startUseFn()
+    // 函数startUseFn()：开始使用button 
     function startUseFn(ele, content, clearEle, parentNode) { // ele 添加在ele元素后 content 按钮文本内容 clearEle 删除元素(含本身) parentNode 删除元素父节点
         let startUse = document.createElement('button');
         // startUse.style
@@ -212,7 +208,7 @@ window.addEventListener('DOMContentLoaded', function () {
         // 开始使用button点击事件
         const removeTips = startUse.addEventListener('click', function () {
             clearEle.style.opacity = '0';   // 隐藏遮罩动画
-            window.localStorage.setItem('FirstOpen', false);    // 只有点击开始使用后，下次不再弹出使用提示
+            window.localStorage.setItem('FirstOpen', 'off');    // 只有点击开始使用后，下次不再弹出使用提示
             setTimeout(function () {
                 clearEle.innerHTML = '';
                 parentNode.removeChild(clearEle);
@@ -220,8 +216,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }, 1000);
         });
     }
-
-    //函数3： 显示/关闭使用提示 useTips
+    // 函数useTipsFn()： 显示/关闭使用提示
     function useTipsFn(aTime) {
         //遮罩层 shade
         let shade = document.createElement('div');
@@ -235,8 +230,7 @@ window.addEventListener('DOMContentLoaded', function () {
         shade.style.opacity = '0';
         shade.style.transition = 'all 1s';
         searchBox.appendChild(shade);   // 添加遮罩至search-box盒子内
-        // 0.5s后
-        window.setTimeout(function () {
+        window.setTimeout(function () { // 定时器 0.5s后
             shade.style.opacity = '1'; // 显示遮罩
             tipsCardFn(shade, '1.4rem', '3.18rem', '【Tab】键,快速切换搜索引擎。'); // 显示tab键提示
             tipsCardFn(shade, '1.4rem', '6.66rem', '光标聚焦搜索栏，【Enter】键，直接进行搜索。');      // 显示Enter键提示
@@ -244,14 +238,13 @@ window.addEventListener('DOMContentLoaded', function () {
             startUseFn(shade, '开始使用', shade, searchBox);    // 开始使用及点击关闭提示信息事件
         }, aTime);
     }
-
-    // 1.第一次启动页面显示使用提示
+    // 7.1.第一次启动页面显示使用提示
     if (!window.localStorage.getItem('FirstOpen')) { useTipsFn(100); }
-    // 2.快捷键Hel按钮 点击事件 显示使用提示
+    // 7.2.快捷键Hel按钮 点击事件 显示使用提示
     searchBox.querySelector('.shortcuts').addEventListener('click', function () { useTipsFn(100); });
 
 
-    // 测试按钮，清楚本地储存
+    // 8.测试按钮，清楚本地储存
     // let reset = document.createElement('button');
     // reset.innerHTML = '清理本地存储数据';
     // searchBox.appendChild(reset);
