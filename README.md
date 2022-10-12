@@ -2,7 +2,7 @@
 
 # ![Minimalist-Search-Page](/images/favicon.png)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/Sumsung524/Minimalist-Search-Page/blob/master/LICENSE) [![version:v1.0.0](https://img.shields.io/badge/version-v1.0.0-green.svg?style=flat-square)](https://github.com/Sumsung524/Minimalist-Search-Page/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/Sumsung524/Minimalist-Search-Page/blob/master/LICENSE) [![version:v1.0.2](https://img.shields.io/badge/version-v1.0.2-green.svg?style=flat-square)](https://github.com/Sumsung524/Minimalist-Search-Page/releases)
 
 极简搜索聚合，还原搜索本质。
 
@@ -10,7 +10,7 @@
 
 国外演示地址Demo:[极简搜索-Minimalist Search](https://sumsung524.github.io/Minimalist-Search-Page/index.html)
 
-国内演示地址Demo:[极简搜索-Minimalist Search](https://sumsu_1.gitee.io/minimalist-search-page/index.html)
+国内演示地址Demo:[极简搜索-Minimalist Search](https://sumsu_1.gitee.io/minimalist-search-page/)
 
 
 
@@ -92,11 +92,11 @@ tips：首次打开页面或选择页面右下角提示按钮可快速查看快�
 
 ## 五、关于
 
-你有更好的建议，联系作者：me@xmq.plus
+如果你有更好的建议或者发现bug，你可以选择pull requests或发邮件me@xmq.plus与我取得联系。
 
 如果项目能够帮到你，你可以：
 
-- 帮我点亮这个项目的小星星⭐star，谢谢~
+- 帮我点亮这个项目的小星星⭐star，十分感谢~
 
 或者你可以：
 

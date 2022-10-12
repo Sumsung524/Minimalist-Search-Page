@@ -3,6 +3,7 @@
 开发特征
 - 原生JS开发
 - flexible.js自适应屏幕
+- 字体图标iconfont(后续加入)
 
 功能需求
 
