@@ -171,92 +171,92 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 七、第一次启动页面，使用提示
-    if (!window.localStorage.getItem('FirstOpen')) {    // 只要第一次打开页面执行代码
+    // 七、第一次启动页面显示使用提示
+    //函数1：显示tipscard tipsCardFn()
+    function tipsCardFn(ele, positionTop, positionLeft, content) {  // ele 添加在ele元素内 positionTop positionLeft tipscard文字位置 content 文本内容
+        let tipscard = document.createElement('div');
+        tipscard.innerHTML = content + '<span></span>';
+        // 提示卡样式 tipscard.style
+        tipscard.style.position = 'absolute';
+        tipscard.style.top = positionTop;
+        tipscard.style.left = positionLeft;
+        tipscard.style.color = '#fff';
+        tipscard.style.whiteSpace = 'nowrap';   // 阻止自动换行，防止换行导致标记位置不准确
+        // 小三角样式 span.style
+        tipscard.querySelector('span').style.position = 'absolute';
+        tipscard.querySelector('span').style.bottom = '-0.0104rem';
+        tipscard.querySelector('span').style.left = '.0208rem';
+        tipscard.querySelector('span').style.transform = 'translateY(100%)';
+        tipscard.querySelector('span').style.width = '0';
+        tipscard.querySelector('span').style.height = '0';
+        tipscard.querySelector('span').style.border = '.0521rem solid transparent';
+        tipscard.querySelector('span').style.borderTopColor = '#fff';
+        ele.appendChild(tipscard);  // 添加节点
+    }
 
-        // 显示tipscard函数 tipsCardFn()
-        function tipsCardFn(ele, positionTop, positionLeft, content) {  // ele 添加在ele元素内 positionTop positionLeft tipscard文字位置 content 文本内容
-            let tipscard = document.createElement('div');
-            tipscard.innerHTML = content + '<span></span>';
-            // 提示卡样式 tipscard.style
-            tipscard.style.position = 'absolute';
-            tipscard.style.top = positionTop;
-            tipscard.style.left = positionLeft;
-            tipscard.style.color = '#fff';
-            tipscard.style.whiteSpace = 'nowrap';
-            // 小三角样式 span.style
-            tipscard.querySelector('span').style.position = 'absolute';
-            tipscard.querySelector('span').style.bottom = '-0.0104rem';
-            tipscard.querySelector('span').style.left = '.0208rem';
-            tipscard.querySelector('span').style.transform = 'translateY(100%)';
-            tipscard.querySelector('span').style.width = '0';
-            tipscard.querySelector('span').style.height = '0';
-            tipscard.querySelector('span').style.border = '.0521rem solid transparent';
-            tipscard.querySelector('span').style.borderTopColor = '#fff';
+    //函数2：开始使用button startUseFn()
+    function startUseFn(ele, content, clearEle, parentNode) { // ele 添加在ele元素后 content 按钮文本内容 clearEle 删除元素(含本身) parentNode 删除元素父节点
+        let startUse = document.createElement('button');
+        // startUse.style
+        startUse.style.position = 'absolute';
+        startUse.style.top = '80%';
+        startUse.style.left = '50%';
+        startUse.style.color = '#fff';
+        startUse.style.padding = '0.08rem';
+        startUse.style.border = '.012rem solid #fff';
+        startUse.style.borderRadius = '.03rem';
+        startUse.style.backgroundColor = 'rgb(7 153 250)';
+        startUse.style.cursor = 'pointer';
+        startUse.innerHTML = content;
+        ele.appendChild(startUse);  // 添加节点
+        // 开始使用button点击事件
+        const removeTips = startUse.addEventListener('click', function () {
+            clearEle.style.opacity = '0';   // 隐藏遮罩动画
+            window.localStorage.setItem('FirstOpen', false);    // 只有点击开始使用后，下次不再弹出使用提示
+            setTimeout(function () {
+                clearEle.innerHTML = '';
+                parentNode.removeChild(clearEle);
+                startUse.removeEventListener('click', removeTips);   //删除事件
+            }, 1000);
+        });
+    }
 
-            ele.appendChild(tipscard);
-        }
-
-        // 开始使用button函数   startUseFn()
-        function startUseFn(ele, content, clearEle, parentNode) { // ele 添加在ele元素后 content 按钮文本内容 clearEle 删除元素(含本身) parentNode 删除元素父节点
-            let startUse = document.createElement('button');
-            // startUse.style
-            startUse.style.position = 'absolute';
-            startUse.style.top = '80%';
-            startUse.style.left = '50%';
-            startUse.style.color = '#fff';
-            startUse.style.padding = '0.08rem';
-            startUse.style.border = '.02rem solid #fff';
-            startUse.style.borderRadius = '.03rem';
-            startUse.style.backgroundColor = 'rgb(255 0 0)';
-            startUse.style.cursor = 'pointer';
-            startUse.innerHTML = content;
-            ele.appendChild(startUse);
-
-            // 开始使用button事件
-            const removeTips = startUse.addEventListener('click', function () {
-                clearEle.style.opacity = '0';   // 隐藏遮罩动画
-                setTimeout(function () {
-                    clearEle.innerHTML = '';
-                    parentNode.removeChild(clearEle);
-                    startUse.removeEventListener('click', removeTips);   //删除事件
-                }, 1000);
-
-            });
-        }
-
-        // 遮罩层 shade
+    //函数3： 显示/关闭使用提示 useTips
+    function useTipsFn(aTime) {
+        //遮罩层 shade
         let shade = document.createElement('div');
         shade.style.position = 'absolute';
         shade.style.top = '0';
         shade.style.left = '0';
         shade.style.width = '100%';
         shade.style.height = '100%';
-        shade.style.backgroundColor = '#333';
+        shade.style.overflow = 'hidden';    // 阻止缩小缩小盒子内部内容超出
+        shade.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
         shade.style.opacity = '0';
         shade.style.transition = 'all 1s';
         searchBox.appendChild(shade);   // 添加遮罩至search-box盒子内
-
         // 0.5s后
         window.setTimeout(function () {
-            shade.style.opacity = '.5'; // 显示遮罩
+            shade.style.opacity = '1'; // 显示遮罩
             tipsCardFn(shade, '1.4rem', '3.18rem', '【Tab】键,快速切换搜索引擎。'); // 显示tab键提示
             tipsCardFn(shade, '1.4rem', '6.66rem', '光标聚焦搜索栏，【Enter】键，直接进行搜索。');      // 显示Enter键提示
             tipsCardFn(shade, '1.65rem', '4.4rem', '光标未聚焦搜索栏，【Enter】键，光标聚焦搜索栏。');  // 显示Enter键位提示
             startUseFn(shade, '开始使用', shade, searchBox);    // 开始使用及点击关闭提示信息事件
-        }, 500);
-
-        window.localStorage.setItem('FirstOpen', false);    // 以后打开不允许执行以上条件语句代码
+        }, aTime);
     }
 
+    // 1.第一次启动页面显示使用提示
+    if (!window.localStorage.getItem('FirstOpen')) { useTipsFn(100); }
+    // 2.快捷键Hel按钮 点击事件 显示使用提示
+    searchBox.querySelector('.shortcuts').addEventListener('click', function () { useTipsFn(100); });
+
+
     // 测试按钮，清楚本地储存
-    // if (true) {
-    //     let reset = document.createElement('button');
-    //     reset.innerHTML = '清理本地存储数据';
-    //     searchBox.appendChild(reset);
-    //     reset.addEventListener('click', function () {
-    //         window.localStorage.clear();
-    //     });
-    // }
+    // let reset = document.createElement('button');
+    // reset.innerHTML = '清理本地存储数据';
+    // searchBox.appendChild(reset);
+    // reset.addEventListener('click', function () {
+    //     window.localStorage.clear();
+    // });
 
 });

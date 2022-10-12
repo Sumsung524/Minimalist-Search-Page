@@ -57,13 +57,14 @@
     width: 100%;
     height: 100%;
     font-size: .0833rem;
-    color: #999;
+    color: #333;
     outline: none;
     text-indent: .2604rem;
     box-sizing: border-box;
     border: .0104rem solid #e6e6e6;
     border-radius: .0521rem;
     transition: all .6s;
+    caret-color: rgb(7, 153, 250);
 }
 
 .search-box .search-bar input::placeholder {
@@ -148,6 +149,25 @@
     height: .1302rem;
     background: url(../images/search_icon.png) no-repeat -0.4167rem 0;
     background-size: 520%;
+}
+
+/* 快捷键Help */
+.bottom-btn {
+    position: absolute;
+    bottom: 0.12rem;
+    right: 0.12rem;
+}
+
+.bottom-btn .shortcuts {
+    width: .125rem;
+    height: .125rem;
+    background: url(../images/help.svg) no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.bottom-btn .shortcuts:hover {
+    background-image: url(../images/help_blue.svg);
 }
 
 /* footer */
