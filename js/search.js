@@ -245,11 +245,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     // 8.测试按钮，清楚本地储存
-    let reset = document.createElement('button');
-    reset.innerHTML = '清理本地存储数据';
-    searchBox.appendChild(reset);
-    reset.addEventListener('click', function () {
-        window.localStorage.clear();
-    });
+    // let reset = document.createElement('button');
+    // reset.innerHTML = '清理本地存储数据';
+    // searchBox.appendChild(reset);
+    // reset.addEventListener('click', function () {
+    //     window.localStorage.clear();
+    // });
 
 });
