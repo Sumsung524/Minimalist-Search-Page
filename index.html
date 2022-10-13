@@ -10,8 +10,12 @@
     <meta name="keywords" content="Minimalist-Search-Page 极简搜索  聚合搜索 简洁搜索页" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/search.css">
+    <!-- CSS初始化 -->
     <link rel="stylesheet" href="css/normalize.css">
+    <!-- flexible.js插件 -->
     <script src="js/flexible.js"></script>
+    <!-- 字体图标 iconfont symbol引用 -->
+    <script src="./js/iconfont.js"></script>
     <script src="js/search.js"></script>
 </head>
 
@@ -27,20 +31,26 @@
             <!-- 搜索输入框 -->
             <input type="text" placeholder="search..." name="search" id="searchInput">
             <!-- 搜索button -->
-            <span class="search-btn"></span>
+            <span class="search-btn">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-search-2-copy"></use>
+                </svg>
+            </span>
             <!-- 搜索引擎选项卡 -->
             <div class="search-card">
                 <span class="arrow"></span>
                 <ul>
-                    <!-- <li>
-                        <span class="search-items-ico"></span>百度
-                    </li> -->
+                    <!-- <li><span class="search-items-ico"></span>百度</li> -->
                 </ul>
             </div>
         </div>
         <!-- 快捷键Help -->
         <div class="bottom-btn">
-            <div class="shortcuts"></div>
+            <div class="shortcuts">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-help"></use>
+                </svg>
+            </div>
         </div>
         <!-- footer -->
         <footer>

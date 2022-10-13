@@ -3,6 +3,16 @@
     background-color: #ccc;
 } */
 
+/* iconfont css*/
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+/* 清楚内外边距 */
 * {
     margin: 0;
     padding: 0;
@@ -64,7 +74,7 @@
     border: .0104rem solid #e6e6e6;
     border-radius: .0521rem;
     transition: all .6s;
-    caret-color: rgb(7, 153, 250);
+    caret-color: #4285f4;
 }
 
 .search-box .search-bar input::placeholder {
@@ -77,22 +87,26 @@
     box-shadow: 0 0 .086rem rgba(7, 153, 250, .1);
 }
 
+/*选中文字样式设置*/
+/* .search-box .search-bar input::selection {
+    color: #fff;
+    background-color: pink;
+} */
+
 /* 搜索button */
 .search-bar .search-btn {
     position: absolute;
     right: .026rem;
     top: 50%;
     transform: translateY(-50%);
-    width: .2083rem;
-    height: .2083rem;
-    background: url(../images/searchlogo_gray.svg) no-repeat center;
-    background-size: 62%;
+    font-size: .1302rem;
+    color: #e6e6e6;
     cursor: pointer;
     transition: all .6s;
 }
 
 .search-bar .search-btn:hover {
-    background-image: url(../images/searchlogo_blue.svg);
+    color: #2e5ee2;
 }
 
 /* 搜索引擎选项卡 */
@@ -159,15 +173,13 @@
 }
 
 .bottom-btn .shortcuts {
-    width: .125rem;
-    height: .125rem;
-    background: url(../images/help.svg) no-repeat center;
-    background-size: contain;
+    font-size: .125rem;
+    color: #ccc;
     cursor: pointer;
 }
 
 .bottom-btn .shortcuts:hover {
-    background-image: url(../images/help_blue.svg);
+    color: rgb(7, 153, 250);
 }
 
 /* footer */
