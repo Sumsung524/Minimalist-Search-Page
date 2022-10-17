@@ -44,13 +44,26 @@
                 </ul>
             </div>
         </div>
-        <!-- 快捷键Help -->
-        <div class="bottom-btn">
-            <div class="shortcuts">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-help"></use>
-                </svg>
-            </div>
+        <!-- 配置菜单按钮 -->
+        <span class="config-menu-btn">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-menu1"></use>
+            </svg>
+        </span>
+        <!-- 配置list -->
+        <div class="config-list">
+            <ul>
+                <li>夜间模式<span class="dark-mode"></span></li>
+                <li>自动切换夜间模式<span id="dark-mode-auto"></span></li>
+                <li class="dark-mode-timeSetting">白天时段:
+                    <em id="timeMin">7</em>:00-<em id="timeMax">18</em>:00
+                    <button>修改</button>
+                </li>
+                <li>开启天气插件<span id="weatherWidget"></span></li>
+                <li>在新页面打开搜索结果<span class="btnOn" id="newPageOn"></span></li>
+                <li>使用提示<span class="btnOn" id="shortcutsTurn"></span></li>
+                <li id="reset">重置设置</li>
+            </ul>
         </div>
         <!-- footer -->
         <footer>

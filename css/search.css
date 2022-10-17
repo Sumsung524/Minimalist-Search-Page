@@ -3,6 +3,12 @@
     background-color: #ccc;
 } */
 
+/* 关闭进度条 webkit */
+/* ::-webkit-scrollbar {
+    width: 0;
+    overflow: hidden;
+} */
+
 /* iconfont css*/
 .icon {
     width: 1em;
@@ -23,7 +29,10 @@
     position: relative;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
     background-color: #fff;
+    /* 夜间模式动画效果*/
+    transition: background-color 1s;
 }
 
 /* 搜索logo */
@@ -59,11 +68,13 @@
     height: .2083rem;
     background: url(../images/search_icon.png) no-repeat;
     background-size: 325%;
+    border-radius: .10415rem;
     cursor: pointer;
 }
 
 /* 搜索输入框 */
 .search-box .search-bar input {
+    float: left;
     width: 100%;
     height: 100%;
     font-size: .0833rem;
@@ -83,14 +94,14 @@
 }
 
 .search-box .search-bar input:focus {
-    border-color: rgb(7, 153, 250);
+    border-color: rgb(7, 153, 250) !important;
     box-shadow: 0 0 .086rem rgba(7, 153, 250, .1);
 }
 
 /*选中文字样式设置*/
 /* .search-box .search-bar input::selection {
     color: #fff;
-    background-color: pink;
+    background-color: #36b36b;
 } */
 
 /* 搜索button */
@@ -154,7 +165,7 @@
 }
 
 .search-card ul li:hover {
-    color: #4285f4;
+    color: #4285f4 !important;
 }
 
 .search-card ul li .search-items-ico {
@@ -163,23 +174,103 @@
     height: .1302rem;
     background: url(../images/search_icon.png) no-repeat -0.4167rem 0;
     background-size: 520%;
+    border-radius: 0.0651rem;
 }
 
 /* 快捷键Help */
-.bottom-btn {
+.shortcuts {
     position: absolute;
     bottom: 0.12rem;
     right: 0.12rem;
-}
-
-.bottom-btn .shortcuts {
     font-size: .125rem;
     color: #ccc;
     cursor: pointer;
 }
 
-.bottom-btn .shortcuts:hover {
+.shortcuts:hover {
     color: rgb(7, 153, 250);
+}
+
+/* 配置菜单按钮 */
+.search-box .config-menu-btn {
+    position: fixed;
+    top: .0521rem;
+    right: .1042rem;
+    font-size: .125rem;
+    color: #ccc;
+    z-index: 999;
+    cursor: pointer;
+}
+
+/* 配置list */
+.search-box .config-list {
+    position: fixed;
+    top: 0;
+    right: -2rem;
+    width: 2rem;
+    height: 100%;
+    z-index: 1;
+    background-color: #ffffff20;
+    box-sizing: border-box;
+    transition: all .8s ease;
+}
+
+.search-box .config-list ul {
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
+    margin: .3646rem .05rem 0.1rem .05rem;
+    border-radius: .0521rem;
+    box-shadow: 0 0 .1rem rgba(204, 204, 204, 0.39);
+}
+
+.search-box .config-list ul li {
+    position: relative;
+    font-size: .0833rem;
+    padding: .056rem 0.3rem .056rem .056rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 配置项按钮开关 */
+.search-box .config-list ul li span {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-20%, -50%);
+    width: .1302rem;
+    height: .0781rem;
+    background: url(../images/off_on.png) no-repeat -0.1563rem 0;
+    background-size: 217%;
+    cursor: pointer;
+}
+
+.search-box .config-list ul li .btnOn {
+    background-position-x: 0;
+}
+
+.search-box .config-list ul li:hover {
+    background-color: #ccc;
+}
+
+.search-box .config-list ul .dark-mode-timeSetting {
+    display: none;
+}
+
+.search-box .config-list ul .dark-mode-timeSetting em {
+    font-style: normal;
+}
+
+.search-box .config-list ul .dark-mode-timeSetting em input {
+    width: .2rem;
+}
+
+.search-box .config-list ul .dark-mode-timeSetting button {
+    position: absolute;
+    top: 50%;
+    right: .03rem;
+    transform: translateY(-50%);
 }
 
 /* footer */
